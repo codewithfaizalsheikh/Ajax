@@ -72,5 +72,9 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
     ],
+    'my_files' => [
+        'driver' => 'local',
+        'root'   => public_path() . '/'
+     ]
 
 ];

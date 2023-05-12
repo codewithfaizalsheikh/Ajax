@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
+use App\Models\Customer;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,5 +31,6 @@ Route::get('/student-fetch', [StudentController::class, 'fetchStudent'])->name('
 
 Route::post('/image/upload', [StudentController::class, 'image_upload'])->name('student.image');
 
+Route::post('/address',[StudentController::class, 'address'])->name('student.address');
 
-
+Route::get('/customer',[CustomerController::class, 'index'])->name('customer.index');

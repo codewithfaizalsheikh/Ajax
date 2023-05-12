@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use App\Models\Image;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -29,6 +30,7 @@ class StudentController extends Controller
         $student->email = $request->input('email');
         $student->phone = $request->input('phone');
         $student->course = $request->input('course');
+        $student->address = $request->input('address');
         if($request->hasFile('image')){
             // $file=$request->file('image');
             // $extention = $file->getClientOriginalExtension();
@@ -78,9 +80,6 @@ class StudentController extends Controller
 
     public function image_upload(Request $request){
         {
-            // $validation = Validator::make($request->all(),[
-            //     'image' => 'required|image|max:2048'
-            // ]);
                 $student_image =new Image;
             if($request->hasFile('image'))
             {
@@ -105,5 +104,34 @@ class StudentController extends Controller
             }
 
         }
+    }
+
+    public function removeMulti(Request $request)
+    {
+        $ids = $request->ids;
+        Student::whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['status'=>true,'message'=>"Student successfully removed."]);
+         
+    }
+
+    public function store_addr(){
+        return view('auto_addr');
+    }
+
+    public function address(Request $request){
+        $address = Address::create($request->all());
+        if($address){
+            return response()->json(['message'=>'inserted succssfully']);
+        }else{
+            return response()->json([
+                'message' => 'something went wrong '
+            ]);
+
+        }
+    }
+
+    public function jquery(){
+
+        return view('jquery');
     }
 }

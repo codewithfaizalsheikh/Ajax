@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('course');
+            $table->string('address')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
         });
